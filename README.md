@@ -54,7 +54,7 @@ Built-in Outputters
 import labrador as l
 
 l.dumps({'foo': 'bar'}, fmt='json')
-l.dumps({'foo': 'bar'}, fmt='yaml')yo
+l.dumps({'foo': 'bar'}, fmt='yaml')
 l.dumps({'foo': 'bar'}, fmt='properties')
 l.dumps({'mysection': {'foo': 'bar'}}, fmt='ini')
 ```
