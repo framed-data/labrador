@@ -25,7 +25,7 @@ print l.dumps(config, fmt='yaml')
 You can also use it straight off the command line as a
 Labrador-powered templating engine:
 
-`r``bash
+```bash
 $ pip install labrador
 $ echo 'hello ${file:///etc/hostname}' | lab
 ```
