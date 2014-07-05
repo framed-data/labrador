@@ -10,5 +10,6 @@ setup(
     author = "Elliot Block",
     author_email = "elliot@deck36.net",
     description = "Configuration retrieval",
-    url = "https://github.com/elliot42/labrador"
+    url = "https://github.com/elliot42/labrador",
+    scripts = ['bin/lab']
 )
