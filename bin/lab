@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+
+import labrador
+import sys
+import re
+import string
+
+if __name__ == "__main__":
+    input_str = sys.stdin.read()
+    pattern = re.compile("\$\{(\S+)}")
+    matches = re.findall(pattern, input_str)
+    match_values = [labrador.get(m) for m in matches]
+    template = re.sub(pattern, "{}", input_str)
+    print template.format(*match_values)
