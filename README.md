@@ -15,16 +15,19 @@ output formatters to get your data out conveniently.
 import labrador as l
 
 config = {
-    'host': l.get(
+    'hostname': l.get('file:///etc/hostname'),
+    'iam_access_key': l.get('iam://my-iam-role/AccessKeyId') or "12345"
 }
 
 print l.dumps(config, fmt='yaml')
 ```
 
-You can also use it straight off the command line:
+You can also use it straight off the command line as a
+Labrador-powered templating engine:
 
 ```bash
-$ lab iam://my-iam-role/AccessKeyId
+$ pip install labrador
+$ echo 'hello ${file:///etc/hostname}' | lab
 ```
 
 
