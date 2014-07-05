@@ -25,7 +25,7 @@ print l.dumps(config, fmt='yaml')
 You can also use it straight off the command line as a
 Labrador-powered templating engine:
 
-```bash
+`r``bash
 $ pip install labrador
 $ echo 'hello ${file:///etc/hostname}' | lab
 ```
@@ -44,6 +44,8 @@ l.get('env://FOO')                 # environment variable `FOO`
 
 l.get('awsmeta://local-ipv4')      # retrieve AWS metadata
 l.get('iam://my-role/AccessKeyId') # retrieve IAM credentials
+
+l.get('facter://ipaddress')        # retrieve facter keys
 ```
 
 

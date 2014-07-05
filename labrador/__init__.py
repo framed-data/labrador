@@ -13,6 +13,7 @@ import labrador.retriever.file
 import labrador.retriever.env
 import labrador.retriever.http
 import labrador.retriever.iam
+import labrador.retriever.facter
 
 import json
 import yaml
@@ -24,6 +25,7 @@ class Labrador:
                  retrievers={
                      'string': labrador.retriever.string.get,
                      'env': labrador.retriever.env.get,
+                     'facter': labrador.retriever.facter.get,
                      'file': labrador.retriever.file.get,
                      'http': labrador.retriever.http.get,
                      'https': labrador.retriever.http.get,
