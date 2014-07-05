@@ -12,7 +12,7 @@ def get(iam_uri):
 
     try:
         http_uri = http_base + m.group('meta_path')
-        r = requests.get(http_uri)
+        r = requests.get(http_uri, timeout=0.1)
         content = r.text if r.status_code == 200 else None
         return [r.status_code, content]
     except Exception, e:
