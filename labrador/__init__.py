@@ -30,20 +30,33 @@ class Labrador:
                      'http': labrador.retriever.http.get,
                      'https': labrador.retriever.http.get,
                      'iam': labrador.retriever.iam.get,
-                     'awsmeta': labrador.retriever.awsmeta.get}):
+                     'awsmeta': labrador.retriever.awsmeta.get},
+                 cache=None):
         self.retrievers = retrievers
         self.regexp = re.compile("(?P<protocol>.*)://(\S+)$")
+        self.cache = cache
 
     def get(self, uri):
         match = self.regexp.match(uri)
         protocol = match.group('protocol') if match else 'string'
+
+        cache_retriever = self.cache.get if self.cache else None
         retriever = self.retrievers.get(protocol)
+
+        # check cache first if one registered
+        if cache_retriever:
+            status, value = cache_retriever(uri)
+            if value:
+                return ['cache', status, value]
 
         if retriever:
             status, value = retriever(uri)
-            return [protocol, status, value]
-        else:
-            return [None, None, None]
+            if value:
+                if self.cache:
+                    self.cache.put(uri, value)
+                return [protocol, status, value]
+
+        return [None, None, None]
 
 def get(uri):
     """Convenience caller"""

@@ -89,4 +89,40 @@ In other words, a protocol handler is just a function that:
 2. Returns a 2-tuple of status information and the retrieved value.
 
 Status information and the retrieved value can be whatever you want.
-The only required protocol is that the 
+The only required protocol is that `None` or `False` for `status` or
+`value` are always considered failure/lack of information present.
+
+
+Caching
+-------
+
+Labrador comes with built-in caching support.  It is disabled by
+default but is enableable by dependency-injecting the cache object:
+
+```python
+import labrador
+import labrador.cache.yaml_cache
+
+l = labrador.Labrador(
+      cache=labrador.cache.yaml_cache.YamlCache('/home/me/.labcache.yml'))
+
+l.get('https://github.com/torvalds.keys') # first time is slow; HTTPS request
+l.get('https://github.com/torvalds.keys') # second time is fast; local disk access
+```
+
+The built-in local YAML cache is persistent by default; it's just a
+file stored on disk that can be re-read.
+
+The caches are modular; they just have the interface:
+
+```python
+class MyCache:
+    def get(self, key):
+        ...
+
+    def put(self, key, value):
+        ...
+```
+
+So you can make any kind of cache (local, shared, expiring, excluding
+certain types of URIs) that you like.
