@@ -113,7 +113,9 @@ l.get('https://github.com/torvalds.keys') # second time is fast; local disk acce
 The built-in local YAML cache is persistent by default; it's just a
 file stored on disk that can be re-read.
 
-The caches are modular; they just have the interface:
+The caches are modular; they just have a `get`/`put` interface, so you
+can make any kind of cache (local, shared, expiring, excluding certain
+types of URIs) that you like:
 
 ```python
 class MyCache:
@@ -122,7 +124,8 @@ class MyCache:
 
     def put(self, key, value):
         ...
-```
 
-So you can make any kind of cache (local, shared, expiring, excluding
-certain types of URIs) that you like.
+import labrador
+l = labrador.Labrador(cache=MyCache())
+l.get(...)
+```
