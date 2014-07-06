@@ -78,7 +78,7 @@ def myhandler(uri):
     value = "retrieved from: " + uri
     return (status, value)
 
-l = labrador.Labrador(retrievers={'myprotocol': myfunc})
+l = labrador.Labrador(retrievers={'myprotocol': myhandler})
 l.get('myprotocol://myresourceuri')
 # => (True, "retrived from: myresoureuri")
 ```
