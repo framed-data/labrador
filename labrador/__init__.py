@@ -58,10 +58,17 @@ class Labrador:
 
         return [None, None, None]
 
+    def g(self, uri):
+        """Convenient caller than only returns a value, not status info"""
+        return self.get(uri)[2]
+
 def get(uri):
-    """Convenience caller"""
-    l = Labrador()
-    return l.get(uri)[2]
+    """Module-level convenience caller"""
+    return Labrador().g(uri)
+
+def g(uri):
+    """Module-level convenience caller"""
+    return Labrador().g(uri)
 
 def dumps(d,
         fmts={
