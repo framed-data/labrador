@@ -8,8 +8,8 @@ setup(
         'jprops',
         'requests'],
     author = "Elliot Block",
-    author_email = "elliot@deck36.net",
+    author_email = "elliot@framed.io",
     description = "Configuration retrieval",
-    url = "https://github.com/elliot42/labrador",
+    url = "https://github.com/framed-data/labrador",
     scripts = ['bin/lab']
 )
